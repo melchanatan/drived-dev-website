@@ -2,7 +2,7 @@ import Folder3d from "@/components/Folder3d";
 
 export default function Home() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center p-24 bg-background">
+    <main className="flex min-h-screen items-center justify-center p-24 bg-background">
       <Folder3d />
       <div className="absolute left-page bottom-page flex flex-col gap-2 [&>*]:flex [&>*]:gap-3 [&>*]:items-center">
         <span>
