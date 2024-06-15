@@ -2,10 +2,10 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center p-24 bg-background">
+    <main className="relative flex min-h-screen items-center justify-center p-24 bg-background">
       <img src="/folder-image.avif" alt="folder image" />
 
-      <div className="absolute left-4 flex flex-col gap-2 [&>*]:flex [&>*]:gap-3 [&>*]:items-center">
+      <div className="absolute left-page bottom-page flex flex-col gap-2 [&>*]:flex [&>*]:gap-3 [&>*]:items-center">
         <span>
           <h1 className="hero-header__sub">Your</h1>
           <h1 className="hero-header highlight">path:// </h1>

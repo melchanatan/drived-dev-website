@@ -20,6 +20,9 @@ module.exports = {
       fontFamily: {
         'raster': 'Raster Grotesk',
         'tiny5': 'Tiny5'
+      },
+      spacing: {
+        'page': '5vw',
       }
     }
   },
