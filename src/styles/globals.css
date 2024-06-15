@@ -33,3 +33,17 @@ body {
     text-wrap: balance;
   }
 }
+
+/* utils */
+.highlight {
+  @apply p-2 rounded-lg bg-background-darken flex items-center justify-center;
+}
+
+/* hero */
+.hero-header {
+  @apply text-6xl text-primary inline font-raster;
+}
+
+.hero-header__sub {
+  @apply text-5xl text-primary inline font-raster;
+}

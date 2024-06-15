@@ -6,6 +6,7 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    extend: {
       colors: {
         'background': {
           DEFAULT: '#F6F2F2',
@@ -20,6 +21,7 @@ module.exports = {
         'raster': 'Raster Grotesk',
         'tiny5': 'Tiny5'
       }
+    }
   },
   plugins: [],
 };
