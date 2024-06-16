@@ -20,19 +20,10 @@ function Box(props) {
   const [hovered, setHover] = useState(false);
   const [active, setActive] = useState(false);
 
-  console.log(nodes);
-  // useFrame(({ mouse }) => {
-  //   const x = (mouse.x * viewport.width) / 2;
-  //   const y = (mouse.y * viewport.height) / 2;
-  //   meshRef.current.position.set(x, y, 0);
-  //   meshRef.current.rotation.set(-y, x, 0);
-  // });
-
-  // useFrame((state, delta) => (meshRef.current.rotation.x += delta));
-
   return (
     <mesh
       {...props}
+      rotation={[0, Math.PI / 2, 0]}
       ref={meshRef}
       scale={0.1}
       onClick={(event) => setActive(!active)}
@@ -72,11 +63,13 @@ const MyCanvas = () => {
 
   return (
     <Canvas>
-      <ambientLight intensity={Math.PI / 2} />
-      <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
+      <ambientLight intensity={Math.PI / 4} />
+      <directionalLight position={[5, 10, 6]} decay={0} intensity={Math.PI} />
+
+      {/* <pointLight position={[5, 10, 6]} decay={0} intensity={Math.PI} /> */}
       <CameraControls ref={cameraControlRef} />
 
-      <Box position={[0, 0, 0]} />
+      <Box position={[0, -5, 0.6]} />
     </Canvas>
   );
 };
