@@ -3,11 +3,9 @@ import { createRoot } from "react-dom/client";
 import React, { useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
-  Html,
   useGLTF,
   SoftShadows,
   ScrollControls,
-  CameraControls,
   useScroll,
   useTexture,
 } from "@react-three/drei";
@@ -19,11 +17,20 @@ function Box(props) {
   const { nodes } = useGLTF("/models/folder/model.gltf");
   const [hovered, setHover] = useState(false);
   const [active, setActive] = useState(false);
+  const defaultRotation = [0.1, Math.PI / 2, 0]
+
+  useFrame(({pointer}, state) => {
+    meshRef.current.rotation.y = defaultRotation[1] + Math.sin(Date.now() * 0.0001) * 1/2;
+    
+    // meshRef.current.rotation.y = defaultRotation[1] + pointer.x * 0.1;
+    // meshRef.current.rotation.x = defaultRotation[0] + pointer.y * 0.1;
+  });
+
 
   return (
     <mesh
       {...props}
-      rotation={[0.1, Math.PI / 2.6, 0]}
+      rotation={defaultRotation}
       ref={meshRef}
       scale={0.1}
       onClick={(event) => setActive(!active)}
@@ -45,8 +52,6 @@ function Box(props) {
 }
 
 const MyCanvas = () => {
-  const cameraControlRef = useRef(null);
-
   return (
     <Canvas>
       <ambientLight intensity={Math.PI / 2} />
@@ -56,8 +61,6 @@ const MyCanvas = () => {
         decay={0}
         intensity={Math.PI}
       />
-      <CameraControls ref={cameraControlRef} />
-
       <Box position={[0, -5, 0.6]} />
     </Canvas>
   );
