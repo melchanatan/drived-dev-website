@@ -1,7 +1,7 @@
 "use client";
 import { createRoot } from "react-dom/client";
 import React, { useRef, useState } from "react";
-import { Canvas, useFrame, useThree,  } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   Html,
   useGLTF,
@@ -23,36 +23,22 @@ function Box(props) {
   return (
     <mesh
       {...props}
-      rotation={[.1, Math.PI / 2.6, 0]}
+      rotation={[0.1, Math.PI / 2.6, 0]}
       ref={meshRef}
       scale={0.1}
       onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}
     >
-      <mesh
-        geometry={nodes.front.geometry}
-        position={[2, 0, 0]}
-      >
-        <meshStandardMaterial
-            color="#F4D44A"
-         />
+      <mesh geometry={nodes.front.geometry} position={[2, 0, 0]}>
+        <meshStandardMaterial color="#F4D44A" roughness={0.5} />
       </mesh>
-      
-      <mesh
-        geometry={nodes.middle.geometry}
-        position={[.3, 0, 0]}
-      >
-        <meshStandardMaterial
-         />
+
+      <mesh geometry={nodes.middle.geometry} position={[0.3, 0, 0]}>
+        <meshStandardMaterial />
       </mesh>
-      <mesh
-        geometry={nodes.back.geometry}
-        position={[-2.45, .98, 0]}
-      >
-        <meshStandardMaterial
-            color="#F4D44A"
-            />
+      <mesh geometry={nodes.back.geometry} position={[-2.45, 0.98, 0]}>
+        <meshStandardMaterial color="#F4D44A" roughness={0.5} />
       </mesh>
     </mesh>
   );
@@ -64,9 +50,12 @@ const MyCanvas = () => {
   return (
     <Canvas>
       <ambientLight intensity={Math.PI / 2} />
-      <directionalLight position={[5, 10, 6]} decay={0} intensity={Math.PI} />
-
-      {/* <pointLight position={[5, 10, 6]} decay={0} intensity={Math.PI} /> */}
+      <pointLight
+        position={[2, 2, 3]}
+        rotation={[0, Math.PI / 2, 0]}
+        decay={0}
+        intensity={Math.PI}
+      />
       <CameraControls ref={cameraControlRef} />
 
       <Box position={[0, -5, 0.6]} />
