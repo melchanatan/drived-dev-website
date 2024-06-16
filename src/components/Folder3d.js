@@ -23,7 +23,7 @@ function Box(props) {
   return (
     <mesh
       {...props}
-      rotation={[0, Math.PI / 2, 0]}
+      rotation={[.1, Math.PI / 2.6, 0]}
       ref={meshRef}
       scale={0.1}
       onClick={(event) => setActive(!active)}
@@ -63,7 +63,7 @@ const MyCanvas = () => {
 
   return (
     <Canvas>
-      <ambientLight intensity={Math.PI / 4} />
+      <ambientLight intensity={Math.PI / 2} />
       <directionalLight position={[5, 10, 6]} decay={0} intensity={Math.PI} />
 
       {/* <pointLight position={[5, 10, 6]} decay={0} intensity={Math.PI} /> */}
