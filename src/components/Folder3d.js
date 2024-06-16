@@ -1,35 +1,51 @@
-"use client"
-import * as THREE from 'three';
-import { useEffect, useRef } from "react";
+'use client'
+import { createRoot } from 'react-dom/client'
+import React, { useRef, useState } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 
-function Folder3d() {
-  const refContainer = useRef(null);
-  useEffect(() => {
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    // document.body.appendChild( renderer.domElement );
-    // use ref as a mount point of the Three.js scene instead of the document.body
-    refContainer.current && refContainer.current.appendChild( renderer.domElement );
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    var cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
-    camera.position.z = 5;
-    var animate = function () {
-      requestAnimationFrame(animate);
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-      renderer.render(scene, camera);
-    };
-    animate();
-  }, []);
+function Box(props) {
+  // This reference will give us direct access to the mesh
+  const meshRef = useRef()
+  const { viewport } = useThree()
 
-
+  // Set up state for the hovered and active state
+  const [hovered, setHover] = useState(false)
+  const [active, setActive] = useState(false)
+  useFrame(({ mouse }) => {
+    const x = (mouse.x * viewport.width) / 2
+    const y = (mouse.y * viewport.height) / 2
+    meshRef.current.position.set(x, y, 0)
+    meshRef.current.rotation.set(-y, x, 0)
+  })
+  // Subscribe this component to the render-loop, rotate the mesh every frame
+  useFrame((state, delta) => (meshRef.current.rotation.x += delta))
+  // Return view, these are regular three.js elements expressed in JSX
   return (
-    <div ref={refContainer}></div>
-  );
+    
+    <mesh
+      {...props}
+      ref={meshRef}
+      scale={active ? 1.5 : 1}
+      onClick={(event) => setActive(!active)}
+      onPointerOver={(event) => setHover(true)}
+      onPointerOut={(event) => setHover(false)}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+    </mesh>
+  )
 }
 
-export default Folder3d
+const MyCanvas = () => {
+  return (
+      <Canvas>
+      <ambientLight intensity={Math.PI / 2} />
+      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
+      <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
+      <Box position={[-1.2, 0, 0]} />
+      <Box position={[1.2, 0, 0]} />
+        </Canvas>
+  )
+}
+
+
+export default MyCanvas;

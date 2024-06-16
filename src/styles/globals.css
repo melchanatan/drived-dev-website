@@ -48,3 +48,4 @@ body {
 .hero-header__sub {
   @apply text-[clamp(2rem,5vw,4rem)] text-primary inline font-raster;
 }
+
