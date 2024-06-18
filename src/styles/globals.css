@@ -34,10 +34,24 @@ body {
   }
 }
 
+/* animation */
+
+@keyframes blink {
+  50% {
+    opacity: 0.0;
+  }
+}
+
+.animate-blink {
+  animation: blink 2s step-start 0s infinite;
+}
+
+
 /* utils */
 .highlight {
   @apply p-2 rounded-lg bg-background-darken/60 backdrop-blur-md flex items-center justify-center;
 }
+
 
 
 /* hero */
