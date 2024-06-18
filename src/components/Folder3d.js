@@ -11,7 +11,7 @@ import {
 } from "@react-three/drei";
 
 function Box(props) {
-  // This reference will give us direct access to the mesh
+  const FOLDER_COLOR = "#FDD347";
   const meshRef = useRef();
   const { viewport } = useThree();
   const { nodes } = useGLTF("/models/folder/model.gltf");
@@ -26,7 +26,6 @@ function Box(props) {
     // meshRef.current.rotation.x = defaultRotation[0] + pointer.y * 0.1;
   });
 
-
   return (
     <mesh
       {...props}
@@ -38,14 +37,14 @@ function Box(props) {
       onPointerOut={(event) => setHover(false)}
     >
       <mesh geometry={nodes.front.geometry} position={[2, 0, 0]}>
-        <meshStandardMaterial color="#F4D44A" roughness={0.5} />
+        <meshStandardMaterial color={FOLDER_COLOR} roughness={0.5} />
       </mesh>
 
       <mesh geometry={nodes.middle.geometry} position={[0.3, 0, 0]}>
         <meshStandardMaterial />
       </mesh>
       <mesh geometry={nodes.back.geometry} position={[-2.45, 0.98, 0]}>
-        <meshStandardMaterial color="#F4D44A" roughness={0.5} />
+        <meshStandardMaterial color={FOLDER_COLOR} roughness={0.5} />
       </mesh>
     </mesh>
   );
@@ -56,9 +55,9 @@ const MyCanvas = () => {
     <Canvas>
       <ambientLight intensity={Math.PI / 2} />
       <pointLight
-        position={[2, 2, 3]}
+        position={[-0.5, 1, 3]}
         rotation={[0, Math.PI / 2, 0]}
-        decay={0}
+        decay={Math.PI/4}
         intensity={Math.PI}
       />
       <Box position={[0, -5, 0.6]} />
