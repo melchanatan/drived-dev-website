@@ -6,6 +6,7 @@ import {
   useGLTF,
   SoftShadows,
   ScrollControls,
+  CameraControls,
   useScroll,
   useTexture,
 } from "@react-three/drei";
@@ -17,11 +18,12 @@ function Box(props) {
   const { nodes } = useGLTF("/models/folder/model.gltf");
   const [hovered, setHover] = useState(false);
   const [active, setActive] = useState(false);
-  const defaultRotation = [0.1, Math.PI / 2, 0]
+  const defaultRotation = [0.1, Math.PI / 2, 0];
 
-  useFrame(({pointer}, state) => {
-    meshRef.current.rotation.y = defaultRotation[1] + Math.sin(Date.now() * 0.0001) * 1/2;
-    
+  useFrame(({ pointer }, state) => {
+    meshRef.current.rotation.y =
+      defaultRotation[1] + (Math.sin(Date.now() * 0.0001) * 1) / 2;
+
     // meshRef.current.rotation.y = defaultRotation[1] + pointer.x * 0.1;
     // meshRef.current.rotation.x = defaultRotation[0] + pointer.y * 0.1;
   });
@@ -57,9 +59,10 @@ const MyCanvas = () => {
       <pointLight
         position={[-0.5, 1, 3]}
         rotation={[0, Math.PI / 2, 0]}
-        decay={Math.PI/4}
+        decay={Math.PI / 4}
         intensity={Math.PI}
       />
+      <CameraControls />
       <Box position={[0, -5, 0.6]} />
     </Canvas>
   );
