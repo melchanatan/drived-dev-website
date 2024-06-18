@@ -3,57 +3,77 @@ import React, { useEffect, useState } from "react";
 import { useTrail, animated, useSpring } from "@react-spring/web";
 import useMeasure from "react-use-measure";
 
-const LOGO_SUBNAME = "Dev";
+const LOGO_SUBNAME = ["Drive", "D ", "Dev"];
 const LOGO_NAME = "D:/";
 const Logo = () => {
   const [animationState, setAnimationState] = useState(false);
   const [data, setData] = useState(LOGO_SUBNAME);
+  const [logo, setLogo] = useState(LOGO_NAME);
   const [open, setOpen] = useState(false);
 
   const props = useSpring({
     width: open
-      ? `${LOGO_NAME.length + LOGO_SUBNAME.length + 1.5}ch`
-      : `${LOGO_NAME.length + 1.5}ch`,
+      ? `${LOGO_SUBNAME.join("").length + 3}ch`
+      : `${LOGO_NAME.length + 2.5}ch`,
   });
 
-  const [trails, api] = useTrail(
-    LOGO_SUBNAME.length,
-    (child, i) => ({
-      from: { opacity: 0 },
-      to: { opacity: 1 },
-      config: { mass: 5, tension: 300, friction: 10 },
-      delay: 10 + (!open ? LOGO_SUBNAME.length - i : i) * 100,
-    }),
-    []
-  );
+  const header = useSpring({
+    width: !open ? `${LOGO_NAME.length}ch` : `0ch`,
+    opacity: !open ? 1 : 0,
+  });
+
+  const [toggle, setToggle] = useState(true);
+
+  const [trails, api] = useTrail(LOGO_SUBNAME.length, (item, index) => ({
+    config: { mass: 5 },
+    opacity: 0,
+  }));
 
   const startAnimation = () => {
     setOpen(true);
-    api.start({ to: { opacity: 1 } });
+    setLogo("");
+    api.start({
+      to: {
+        opacity: 1,
+        y: 0,
+      },
+    });
   };
 
   const stopAnimation = () => {
     setOpen(false);
+    setLogo(LOGO_NAME);
     api.start({
-      to: { opacity: 0 },
+      to: {
+        opacity: 0,
+        y: 40,
+      },
     });
   };
 
   return (
-    <animated.div
+    <a
+      className="py-3 cursor-pointer"
       onMouseEnter={startAnimation}
       onMouseLeave={stopAnimation}
-      style={props}
-      className="font-tiny5 text-md py-[2px] px-2 bg-primary text-background rounded-[4px] flex"
     >
-      <span></span>
-      <p>D:/</p>
-      <div class="flex">
-        {trails.map((spring, index) => (
-          <animated.div style={spring}>{data[index]}</animated.div>
-        ))}
-      </div>
-    </animated.div>
+      <animated.div
+        style={props}
+        className="font-tiny5 text-md py-[2px] px-2 bg-primary text-background rounded-[4px] flex"
+      >
+        <animated.div style={header} className="flex">
+          {logo} <p className="animate-blink text-background">_</p>
+        </animated.div>
+
+        <div class="flex">
+          {trails.map((spring, index) => (
+            <animated.div style={spring} className="min-w-[1ch] pr-[1ch]">
+              {data[index]}
+            </animated.div>
+          ))}
+        </div>
+      </animated.div>
+    </a>
   );
 };
 
