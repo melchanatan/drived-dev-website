@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useTrail, animated, useSpring } from "@react-spring/web";
-import useMeasure from "react-use-measure";
 
 const LOGO_SUBNAME = ["Drive", "D ", "Dev"];
 const LOGO_NAME = "D:/";
