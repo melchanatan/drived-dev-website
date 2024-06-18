@@ -21,9 +21,8 @@ function Box(props) {
   const defaultRotation = [0.1, Math.PI / 2, 0];
 
   useFrame(({ pointer }, state) => {
-    meshRef.current.rotation.y =
-      defaultRotation[1] + (Math.sin(Date.now() * 0.0001) * 1) / 2;
-
+    // meshRef.current.rotation.y =
+    //   defaultRotation[1] + (Math.sin(Date.now() * 0.0001) * 1) / 2;
     // meshRef.current.rotation.y = defaultRotation[1] + pointer.x * 0.1;
     // meshRef.current.rotation.x = defaultRotation[0] + pointer.y * 0.1;
   });
@@ -38,14 +37,14 @@ function Box(props) {
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}
     >
-      <mesh geometry={nodes.front.geometry} position={[2, 0, 0]}>
+      <mesh geometry={nodes.front.geometry} position={[0.6, 0, 0]}>
         <meshStandardMaterial color={FOLDER_COLOR} roughness={0.5} />
       </mesh>
 
-      <mesh geometry={nodes.middle.geometry} position={[0.3, 0, 0]}>
+      <mesh geometry={nodes.middle.geometry} position={[0, 0, 0]}>
         <meshStandardMaterial />
       </mesh>
-      <mesh geometry={nodes.back.geometry} position={[-2.45, 0.98, 0]}>
+      <mesh geometry={nodes.back.geometry} position={[-0.6, 0, 0]}>
         <meshStandardMaterial color={FOLDER_COLOR} roughness={0.5} />
       </mesh>
     </mesh>
@@ -63,7 +62,7 @@ const MyCanvas = () => {
         intensity={Math.PI}
       />
       <CameraControls />
-      <Box position={[0, -5, 0.6]} />
+      <Box position={[5.4, -1, -2]} />
     </Canvas>
   );
 };
