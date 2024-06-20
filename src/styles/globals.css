@@ -18,6 +18,16 @@
   }
 }
 
+::-moz-selection {
+  color: #f6f2f2;
+  background: #162230;
+}
+
+::selection {
+  color: #f6f2f2;
+  background: #162230;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -38,7 +48,7 @@ body {
 
 @keyframes blink {
   50% {
-    opacity: 0.0;
+    opacity: 0;
   }
 }
 
@@ -46,13 +56,10 @@ body {
   animation: blink 2s step-start 0s infinite;
 }
 
-
 /* utils */
 .highlight {
-  @apply p-2 rounded-lg bg-background-darken/60 backdrop-blur-md flex items-center justify-center;
+  @apply p-2 rounded-lg bg-background-darken/60 backdrop-blur-sm flex items-center justify-center;
 }
-
-
 
 /* hero */
 .hero-header {
@@ -62,4 +69,3 @@ body {
 .hero-header__sub {
   @apply text-[clamp(2rem,7vw,5rem)] text-primary inline font-raster;
 }
-

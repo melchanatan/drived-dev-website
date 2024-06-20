@@ -8,23 +8,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'background': {
-          DEFAULT: '#F6F2F2',
-          darken: '#F1E4E4',
+        background: {
+          DEFAULT: "#F6F2F2",
+          darken: "#DECFCD",
         },
-        'primary': {
-          DEFAULT: '#1D1E21',
-          lighten: '#2C2D32',
-        }
+        primary: {
+          DEFAULT: "#1D1E21",
+          lighten: "#2C2D32",
+        },
       },
       fontFamily: {
-        'raster': 'Raster Grotesk',
-        'tiny5': 'Tiny5'
+        raster: "Raster Grotesk",
+        tiny5: "Tiny5",
       },
       spacing: {
-        'page': '5vw',
-      }
-    }
+        page: "5vw",
+      },
+    },
   },
   plugins: [],
 };
