@@ -1,15 +1,8 @@
 "use client";
-import { createRoot } from "react-dom/client";
 import React, { useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import {
-  useGLTF,
-  SoftShadows,
-  ScrollControls,
-  CameraControls,
-  useScroll,
-  useTexture,
-} from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
+import { useControls } from "leva";
 
 function Box(props) {
   const FOLDER_COLOR = "#FDD347";
@@ -20,49 +13,77 @@ function Box(props) {
   const [active, setActive] = useState(false);
   const defaultRotation = [0.1, Math.PI / 2, 0];
 
+  const { rotation } = useControls({
+    rotation: defaultRotation,
+  });
+
   useFrame(({ pointer }, state) => {
-    // meshRef.current.rotation.y =
-    //   defaultRotation[1] + (Math.sin(Date.now() * 0.0001) * 1) / 2;
+    meshRef.current.rotation.y = meshRef.current.rotation.y + 0.02;
     // meshRef.current.rotation.y = defaultRotation[1] + pointer.x * 0.1;
     // meshRef.current.rotation.x = defaultRotation[0] + pointer.y * 0.1;
   });
-
+  // {"spotLightPosition":[-0.02000000000000008,1,1]}
   return (
-    <mesh
+    <group
       {...props}
-      rotation={defaultRotation}
+      rotation={rotation}
       ref={meshRef}
       scale={0.1}
       onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}
     >
-      <mesh geometry={nodes.front.geometry} position={[0.6, 0, 0]}>
+      <mesh
+        geometry={nodes.front.geometry}
+        position={[0.4, 0, 0]}
+        castShadow
+        receiveShadow
+      >
         <meshStandardMaterial color={FOLDER_COLOR} roughness={0.5} />
       </mesh>
 
-      <mesh geometry={nodes.middle.geometry} position={[0, 0, 0]}>
+      <mesh
+        geometry={nodes.middle.geometry}
+        position={[0, 0, 0]}
+        castShadow
+        receiveShadow
+      >
         <meshStandardMaterial />
       </mesh>
-      <mesh geometry={nodes.back.geometry} position={[-0.6, 0, 0]}>
+
+      <mesh
+        geometry={nodes.back.geometry}
+        position={[0.5, 0, 0]}
+        castShadow
+        receiveShadow
+      >
         <meshStandardMaterial color={FOLDER_COLOR} roughness={0.5} />
       </mesh>
-    </mesh>
+    </group>
   );
 }
 
 const MyCanvas = () => {
+  const { spotLightPosition, spotLightRotation } = useControls({
+    spotLightPosition: [1.02, 1.32, 1.49],
+    spotLightRotation: [0, 0, 0],
+  });
+  // {"spotLightPosition":[1.020000000000001,1.3200000000000003,1.4899999999999969]}
+  // {"spotLightPosition":[1.6,1.9600000000000002,-1.3500000000000003]}
   return (
-    <Canvas>
-      <ambientLight intensity={Math.PI / 2} />
-      <pointLight
-        position={[-0.5, 1, 3]}
-        rotation={[0, Math.PI / 2, 0]}
+    <Canvas shadows>
+      <ambientLight intensity={Math.PI / 2} color="#C7E1FE" />
+      <directionalLight
+        castShadow
+        position={spotLightPosition}
+        rotation={spotLightRotation}
         decay={Math.PI / 4}
+        color="#FFCE95"
         intensity={Math.PI}
       />
-      <CameraControls />
-      <Box position={[5.4, -1, -2]} />
+
+      {/* <directionalLight castShadow position={spotLightPosition} /> */}
+      <Box />
     </Canvas>
   );
 };
