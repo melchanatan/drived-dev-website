@@ -1,8 +1,8 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
-import { useControls } from "leva";
+import { useGLTF, OrbitControls } from "@react-three/drei";
+import useMousePosition from "@/hooks/useMousePosition";
 
 function Box(props) {
   const FOLDER_COLOR = "#FDD347";
@@ -13,25 +13,29 @@ function Box(props) {
   const [active, setActive] = useState(false);
   const defaultRotation = [0.1, Math.PI / 2, 0];
 
-  const { rotation } = useControls({
-    rotation: defaultRotation,
-  });
+  const [windowWidth, windowHeight] = [
+    document.documentElement.clientWidth,
+    document.documentElement.clientHeight,
+  ];
+
+  const mousePosition = useMousePosition();
 
   useFrame(({ pointer }, state) => {
-    meshRef.current.rotation.y = meshRef.current.rotation.y + 0.02;
-    // meshRef.current.rotation.y = defaultRotation[1] + pointer.x * 0.1;
-    // meshRef.current.rotation.x = defaultRotation[0] + pointer.y * 0.1;
+    meshRef.current.rotation.y =
+      defaultRotation[1] + (mousePosition.x - windowWidth / 2) * 0.001;
+    meshRef.current.rotation.x =
+      defaultRotation[0] + (mousePosition.y - windowHeight / 2) * 0.0006;
   });
-  // {"spotLightPosition":[-0.02000000000000008,1,1]}
+
   return (
     <group
       {...props}
-      rotation={rotation}
+      rotation={defaultRotation}
       ref={meshRef}
       scale={0.1}
       onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}
+      // onPointerOver={(event) => null}
+      // onPointerOut={(event) => setHover(false)}
     >
       <mesh
         geometry={nodes.front.geometry}
@@ -44,7 +48,7 @@ function Box(props) {
 
       <mesh
         geometry={nodes.middle.geometry}
-        position={[0, 0, 0]}
+        position={[0.4, 0, 0]}
         castShadow
         receiveShadow
       >
@@ -64,12 +68,9 @@ function Box(props) {
 }
 
 const MyCanvas = () => {
-  const { spotLightPosition, spotLightRotation } = useControls({
-    spotLightPosition: [1.02, 1.32, 1.49],
-    spotLightRotation: [0, 0, 0],
-  });
-  // {"spotLightPosition":[1.020000000000001,1.3200000000000003,1.4899999999999969]}
-  // {"spotLightPosition":[1.6,1.9600000000000002,-1.3500000000000003]}
+  const spotLightPosition = [1.02, 1.32, 1.49];
+  const spotLightRotation = [0, 0, 0];
+
   return (
     <Canvas shadows>
       <ambientLight intensity={Math.PI / 2} color="#C7E1FE" />
@@ -81,8 +82,6 @@ const MyCanvas = () => {
         color="#FFCE95"
         intensity={Math.PI}
       />
-
-      {/* <directionalLight castShadow position={spotLightPosition} /> */}
       <Box />
     </Canvas>
   );
