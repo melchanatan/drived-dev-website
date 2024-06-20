@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, OrbitControls } from "@react-three/drei";
 import useMousePosition from "@/hooks/useMousePosition";
+import { easing } from "maath";
 
 function Box(props) {
   const FOLDER_COLOR = "#FDD347";
@@ -20,11 +21,17 @@ function Box(props) {
 
   const mousePosition = useMousePosition();
 
-  useFrame(({ pointer }, state) => {
-    meshRef.current.rotation.y =
-      defaultRotation[1] + (mousePosition.x - windowWidth / 2) * 0.001;
-    meshRef.current.rotation.x =
-      defaultRotation[0] + (mousePosition.y - windowHeight / 2) * 0.0006;
+  useFrame(({ pointer }, delta) => {
+    easing.dampE(
+      meshRef.current.rotation,
+      [
+        defaultRotation[0] + (mousePosition.y - windowHeight / 2) * 0.0006,
+        defaultRotation[1] + (mousePosition.x - windowWidth / 2) * 0.001,
+        0,
+      ],
+      0.5,
+      delta
+    );
   });
 
   return (
