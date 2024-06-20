@@ -1,4 +1,5 @@
 import MyCanvas from "@/components/Folder3d";
+import Footer from "@/components/common/Footer";
 
 export default function Home() {
   return (
@@ -19,7 +20,13 @@ export default function Home() {
           </span>
         </div>
       </div>
-      <h1> hello</h1>
+      <p className="absolute right-page bottom-page text-primary w-[35ch] text-right text-md  font-raster">
+        {" "}
+        We strive to be your trusted technology partner. We turn your ideas into
+        reality with boundless creativity and expertise. Enjoy peace of mind
+        knowing you're getting fair pricing and exceptional service.
+      </p>
+      <Footer />
     </main>
   );
 }

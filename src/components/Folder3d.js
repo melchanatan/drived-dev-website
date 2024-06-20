@@ -48,7 +48,7 @@ function Box(props) {
       {...props}
       rotation={defaultRotation}
       ref={meshRef}
-      scale={0.1}
+      scale={0.13}
       // onClick={() => setActive(Number(!active))}
       onPointerOver={() => setActive(1)}
       onPointerOut={() => setActive(0)}
@@ -66,6 +66,7 @@ function Box(props) {
         geometry={nodes.middle.geometry}
         position-x={0.4}
         position-y={position}
+        color={"#F9EEEB"}
         castShadow
         receiveShadow
       >

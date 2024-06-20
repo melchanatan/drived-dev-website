@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       colors: {
         background: {
-          DEFAULT: "#F6F2F2",
+          DEFAULT: "#FBF4F1",
           darken: "#DECFCD",
         },
         primary: {
@@ -22,7 +22,7 @@ module.exports = {
         tiny5: "Tiny5",
       },
       spacing: {
-        page: "5vw",
+        page: "3vw",
       },
     },
   },
