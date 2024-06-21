@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useGLTF, OrbitControls } from "@react-three/drei";
+import { useGLTF, OrbitControls, Html } from "@react-three/drei";
 import useMousePosition from "@/hooks/useMousePosition";
 import { easing } from "maath";
 import { a } from "@react-spring/three";
@@ -15,6 +15,7 @@ function Box(props) {
   const [hovered, setHover] = useState(false);
   const [active, setActive] = useState(0);
   const defaultRotation = [0.1, Math.PI / 2, 0];
+  const textRef = useRef();
 
   const [windowWidth, windowHeight] = [
     document.documentElement.clientWidth,
@@ -49,7 +50,6 @@ function Box(props) {
       rotation={defaultRotation}
       ref={meshRef}
       scale={0.13}
-      // onClick={() => setActive(Number(!active))}
       onPointerOver={() => setActive(1)}
       onPointerOut={() => setActive(0)}
     >
@@ -62,16 +62,27 @@ function Box(props) {
         <meshStandardMaterial color={FOLDER_COLOR} roughness={0.5} />
       </mesh>
 
-      <a.mesh
+      <a.group
         geometry={nodes.middle.geometry}
         position-x={0.4}
         position-y={position}
-        color={"#F9EEEB"}
-        castShadow
-        receiveShadow
       >
-        <a.meshStandardMaterial />
-      </a.mesh>
+        {/* -4, 8, -17 */}
+        <Html position={[-1.5, 8, -13]} occlude={[meshRef]} ref={textRef}>
+          <div className="font-raster text-gray-700/20 w-[500px]">
+            <h1 className="text-3xl font-bold">come and say hi!</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          </div>
+        </Html>
+        <mesh
+          color={"#F9EEEB"}
+          geometry={nodes.middle.geometry}
+          castShadow
+          receiveShadow
+        >
+          <meshStandardMaterial />
+        </mesh>
+      </a.group>
 
       <mesh
         geometry={nodes.back.geometry}
@@ -90,7 +101,7 @@ const MyCanvas = () => {
   const spotLightRotation = [0, 0, 0];
 
   return (
-    <Canvas shadows>
+    <Canvas shadows className="z-10">
       <ambientLight intensity={Math.PI / 2} color="#C7E1FE" />
       {/* <OrbitControls /> */}
       <directionalLight

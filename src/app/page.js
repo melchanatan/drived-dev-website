@@ -6,7 +6,7 @@ export default function Home() {
     <main className="w-full h-screen bg-background">
       <MyCanvas />
       <div className="flex items-center justify-center ">
-        <div className="absolute left-page bottom-page flex flex-col gap-2 [&>*]:flex [&>*]:gap-3 [&>*]:items-center">
+        <div className="absolute left-page bottom-page flex flex-col gap-2 [&>*]:flex [&>*]:gap-3 [&>*]:items-center z-20">
           <span>
             <h1 className="hero-header__sub">Your</h1>
             <h1 className="hero-header highlight">path:// </h1>
