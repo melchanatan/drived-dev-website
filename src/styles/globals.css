@@ -75,9 +75,9 @@ body {
 }
 
 .loading__mouth--front {
-  @apply border-y-[10px] border-l-[10px] border-background w-[100px] h-[3.1rem] bg-primary translate-x-3;
+  @apply border-x-[10px] border-b-[10px] border-background w-[50px] h-[100px] bg-primary -translate-y-5;
 }
 
 .loading__mouth--back {
-  @apply bottom-[-3.1rem] left-[-1.2rem] border-t-[10px] border-background h-[3.1rem] w-[100px] bg-primary translate-x-3;
+  @apply left-[18px] border-l-[10px] border-background h-[100px] w-[3.1rem] bg-primary translate-x-3;
 }
