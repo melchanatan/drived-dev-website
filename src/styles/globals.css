@@ -71,11 +71,15 @@ body {
 }
 
 .loading__text {
-  @apply py-2 px-3 bg-background/20 font-raster rounded-md;
+  @apply py-2 px-3 bg-red-400 font-raster rounded-md;
 }
 
 .loading__mouth--front {
   @apply border-x-[10px] border-b-[10px] border-background w-[50px] h-[100px]  -translate-y-5;
+}
+
+.loading__mouth--top {
+  @apply bg-background w-[30px] h-[10px] translate-y-[-20px] translate-x-[10px];
 }
 
 .loading__mouth--back {
