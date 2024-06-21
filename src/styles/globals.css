@@ -75,9 +75,13 @@ body {
 }
 
 .loading__mouth--front {
-  @apply border-x-[10px] border-b-[10px] border-background w-[50px] h-[100px] bg-primary -translate-y-5;
+  @apply border-x-[10px] border-b-[10px] border-background w-[50px] h-[100px]  -translate-y-5;
 }
 
 .loading__mouth--back {
-  @apply left-[18px] border-l-[10px] border-background h-[100px] w-[3.1rem] bg-primary translate-x-3;
+  @apply absolute bottom-[20px] left-[28px] border-l-[10px] border-background bg-primary h-[100px] w-[3.1rem] translate-x-3;
+}
+
+.loading__mouth--cover {
+  @apply absolute bottom-[-50vh] left-[3.2rem] w-screen h-screen bg-primary;
 }
