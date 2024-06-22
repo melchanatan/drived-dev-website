@@ -7,8 +7,7 @@ const Loading = () => {
   const [chomping, setChomping] = useState(true);
   const [animationStart, setAnimationStart] = useState(false);
   const [eyebrownPos, setEyebrownPos] = useState(true);
-
-  const [ref, { width }] = useMeasure();
+  const [isRotated, setIsRotated] = useState(false);
 
   useEffect(() => {
     setAnimationStart(true);
@@ -28,6 +27,7 @@ const Loading = () => {
     setEyebrownPos(!eyebrownPos);
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setEyebrownPos(eyebrownPos);
+    setIsRotated(true);
   };
 
   const spring = useSpring({
@@ -58,17 +58,23 @@ const Loading = () => {
           :{eyebrownPos ? "/" : "\\"}
         </h1>
         <div className="loading__mouth--cover z-[102]"></div>
-        <span>
+        <span
+          className="z-auto"
+          style={{
+            rotate: isRotated ? "180deg" : "0deg",
+            transform: isRotated ? "translateY(40px)" : "",
+          }}
+        >
           <div className="loading__mouth--top"></div>
           <animated.div
             className="z-[100] loading__mouth--front"
             style={spring}
           ></animated.div>
-          <animated.div
-            className="z-[110] loading__mouth--back"
-            style={spring}
-          ></animated.div>
         </span>
+        <animated.div
+          className="z-[110] loading__mouth--back"
+          style={{ ...spring, opacity: isRotated ? 0 : 1 }}
+        ></animated.div>
       </div>
     </section>
   );
