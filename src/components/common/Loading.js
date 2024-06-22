@@ -12,18 +12,12 @@ const Loading = () => {
   useEffect(() => {
     setAnimationStart(true);
     swapEyebrownPos();
-    // timer to toggle is chomping
-    const timer = setInterval(() => {
-      setChomping(!chomping);
-    }, 2400);
-
-    return () => {
-      clearInterval(timer);
-    };
   }, []);
 
   const swapEyebrownPos = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 3300));
+    await new Promise((resolve) => setTimeout(resolve, 2400));
+    setChomping(!chomping);
+    await new Promise((resolve) => setTimeout(resolve, 900));
     setEyebrownPos(!eyebrownPos);
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setEyebrownPos(eyebrownPos);
