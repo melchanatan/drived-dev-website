@@ -41,7 +41,6 @@ const Loading = () => {
   return (
     <section className="fixed flex justify-center items-center bg-primary  text-background w-full h-full z-[100] overflow-hidden">
       <animated.div
-        ref={ref}
         className="flex gap-[30px] absolute top-1/2 translate-y-[50%] z-[101] left-[calc(50%-300px)]  duration-[4000ms] transition-all"
         style={{
           translateX: animationStart ? 400 : 0,
