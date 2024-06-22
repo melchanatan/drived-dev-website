@@ -6,20 +6,29 @@ import useMeasure from "react-use-measure";
 const Loading = () => {
   const [chomping, setChomping] = useState(true);
   const [animationStart, setAnimationStart] = useState(false);
-  let currentIndex = 0;
+  const [eyebrownPos, setEyebrownPos] = useState(true);
 
   const [ref, { width }] = useMeasure();
 
   useEffect(() => {
+    setAnimationStart(true);
+    swapEyebrownPos();
     // timer to toggle is chomping
     const timer = setInterval(() => {
       setChomping(!chomping);
-    }, 1500);
+    }, 2400);
 
     return () => {
       clearInterval(timer);
     };
-  });
+  }, []);
+
+  const swapEyebrownPos = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 3300));
+    setEyebrownPos(!eyebrownPos);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setEyebrownPos(eyebrownPos);
+  };
 
   const spring = useSpring({
     height: chomping ? 100 : 2,
@@ -28,46 +37,26 @@ const Loading = () => {
 
   const emojiPools = ["📁", "📃", "📖", ""];
   const messages = emojiPools;
-  const trails = useTrail(messages.length, {
-    x: width * 2,
-    config: { duration: 2000 },
-    reverse: true,
-  });
-
-  const playAnimation = () => {
-    setChomping(!chomping);
-    // api.start({
-    //   to: {
-    //     opacity: 0,
-    //     y: 40,
-    //   },
-    // });
-  };
 
   return (
-    <section className="absolute flex justify-center items-center bg-primary  text-background w-full h-full z-[100] overflow-hidden">
-      <button onClick={playAnimation} className="absolute top-0">
-        yes
-      </button>
+    <section className="fixed flex justify-center items-center bg-primary  text-background w-full h-full z-[100] overflow-hidden">
       <animated.div
         ref={ref}
-        className="flex gap-10 absolute top-1/2 translate-y-[50%] left-[-100px] z-[101] animate-big-bounce"
-        // style={{
-        //   left: -width * 3,
-        // }}
+        className="flex gap-[30px] absolute top-1/2 translate-y-[50%] z-[101] left-[calc(50%-300px)]  duration-[4000ms] transition-all"
+        style={{
+          translateX: animationStart ? 400 : 0,
+        }}
       >
-        {trails.map((r, index) => {
-          currentIndex = index;
-
+        {messages.map((r, index) => {
           return (
-            <animated.div style={r} className="text-4xl">
-              {messages[index]}
-            </animated.div>
+            <p className="text-4xl animate-big-bounce">{messages[index]}</p>
           );
         })}
       </animated.div>
       <div className="flex flex-col justify-center items-center relative">
-        <h1 className="font-tiny5 text-[5rem] -rotate-90">:/</h1>
+        <h1 className="font-tiny5 text-[5rem] -rotate-90">
+          :{eyebrownPos ? "/" : "\\"}
+        </h1>
         <div className="loading__mouth--cover z-[102]"></div>
         <span>
           <div className="loading__mouth--top"></div>
