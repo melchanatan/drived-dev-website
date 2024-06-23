@@ -61,29 +61,16 @@ function Folder3D(props) {
       >
         <meshStandardMaterial color={FOLDER_COLOR} roughness={0.5} />
       </mesh>
-
-      <a.group
+      <a.mesh
+        color={PAPER_COLOR}
         geometry={nodes.middle.geometry}
         position-x={0.4}
         position-y={middlePositionY}
+        castShadow
+        receiveShadow
       >
-        {/* -4, 8, -17 */}
-        <Html position={[-1.5, 8, -13]} occlude={[meshRef]} ref={textRef}>
-          <div className="font-raster text-gray-700/20 w-[500px]">
-            <h1 className="text-3xl font-bold">come and say hi!</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-          </div>
-        </Html>
-        <mesh
-          color={PAPER_COLOR}
-          geometry={nodes.middle.geometry}
-          castShadow
-          receiveShadow
-        >
-          <meshStandardMaterial />
-        </mesh>
-      </a.group>
-
+        <meshStandardMaterial />
+      </a.mesh>
       <mesh
         geometry={nodes.back.geometry}
         position={[0.5, 0, 0]}
