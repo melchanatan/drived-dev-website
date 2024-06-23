@@ -8,10 +8,19 @@ const Loading = () => {
   const [animationStart, setAnimationStart] = useState(false);
   const [eyebrownPos, setEyebrownPos] = useState(true);
   const [isRotated, setIsRotated] = useState(false);
+  const [showLoading, setShowLoading] = useState(true);
 
   useEffect(() => {
+    document.body.classList.add("no-scroll");
+
     setAnimationStart(true);
     swapEyebrownPos();
+    // Add the no-scroll class to the body element
+
+    // Cleanup by removing the no-scroll class when the component unmounts
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
   }, []);
 
   const swapEyebrownPos = async () => {
@@ -22,6 +31,9 @@ const Loading = () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setEyebrownPos(eyebrownPos);
     setIsRotated(true);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    setShowLoading(false);
+    document.body.classList.remove("no-scroll");
   };
 
   const spring = useSpring({
@@ -33,7 +45,13 @@ const Loading = () => {
   const messages = emojiPools;
 
   return (
-    <section className="fixed flex justify-center items-center bg-primary  text-background w-full h-full z-[100] overflow-hidden">
+    <section
+      className="fixed flex justify-center items-center bg-primary  text-background w-full h-full z-[100] overflow-hidden transition-all duration-200"
+      style={{
+        opacity: showLoading ? 1 : 0,
+        visibility: showLoading ? "visible" : "hidden",
+      }}
+    >
       <animated.div
         className="flex gap-[30px] absolute top-1/2 translate-y-[50%] z-[101] left-[calc(50%-300px)]  duration-[4000ms] transition-all"
         style={{
