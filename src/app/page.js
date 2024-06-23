@@ -1,6 +1,5 @@
 import FolderCanvas from "@/components/FolderCanvas";
 import Footer from "@/components/common/Footer";
-import Loading from "@/components/common/Loading";
 export default function Home() {
   return (
     <>
