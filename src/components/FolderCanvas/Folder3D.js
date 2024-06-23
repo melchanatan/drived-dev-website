@@ -49,7 +49,7 @@ function Folder3D(props) {
       {...props}
       rotation={defaultRotation}
       ref={meshRef}
-      scale={0.13}
+      scale={0.11}
       onPointerOver={() => setIsActive(1)}
       onPointerOut={() => setIsActive(0)}
     >

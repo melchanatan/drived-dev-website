@@ -1,46 +1,52 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTrail, animated, useSpring } from "@react-spring/web";
 
 const LOGO_SUBNAME = ["Drive", "D ", "Dev"];
 const LOGO_NAME = "D:/";
+
 const Logo = () => {
-  const [animationState, setAnimationState] = useState(false);
-  const [data, setData] = useState(LOGO_SUBNAME);
   const [logo, setLogo] = useState(LOGO_NAME);
   const [open, setOpen] = useState(false);
+  const [timeout, setTimeout] = useState(null);
+  const ref = useRef();
 
-  const props = useSpring({
+  const backgroundSpring = useSpring({
     width: open
       ? `${LOGO_SUBNAME.join("").length + 3}ch`
       : `${LOGO_NAME.length + 2.5}ch`,
   });
 
-  const header = useSpring({
+  const headerSpring = useSpring({
     width: !open ? `${LOGO_NAME.length}ch` : `0ch`,
     opacity: !open ? 1 : 0,
   });
 
-  const [toggle, setToggle] = useState(true);
-
-  const [trails, api] = useTrail(LOGO_SUBNAME.length, (item, index) => ({
-    config: { mass: 5 },
+  const [trails, api] = useTrail(LOGO_SUBNAME.length, () => ({
+    config: { mass: 5, tension: 300 },
     opacity: 0,
   }));
 
-  const startAnimation = () => {
+  const startAnimation = (e) => {
+    if (e.target == ref.current && timeout) return;
+    setTimeout(() => {
+      setTimeout(true);
+    }, 1000);
+
     setOpen(true);
     setLogo("");
     api.start({
       to: {
         opacity: 1,
         y: 0,
+        display: "flex",
       },
     });
   };
 
-  const stopAnimation = () => {
-    setOpen(false);
+  const stopAnimation = (e) => {
+    if (e.target == ref.current) return;
+
     setLogo(LOGO_NAME);
     api.start({
       to: {
@@ -48,26 +54,27 @@ const Logo = () => {
         y: 40,
       },
     });
+    setOpen(false);
   };
 
   return (
     <a
       className="py-3 cursor-pointer"
-      onMouseEnter={startAnimation}
+      onMouseOver={startAnimation}
       onMouseLeave={stopAnimation}
     >
       <animated.div
-        style={props}
+        style={backgroundSpring}
         className="font-tiny5 text-md py-[2px] px-2 bg-primary text-background rounded-[4px] flex"
       >
-        <animated.div style={header} className="flex">
+        <animated.div style={headerSpring} className="flex">
           {logo} <p className="animate-blink text-background">_</p>
         </animated.div>
 
-        <div class="flex">
+        <div class="flex" ref={ref}>
           {trails.map((spring, index) => (
             <animated.div style={spring} className="min-w-[1ch] pr-[1ch]">
-              {data[index]}
+              {LOGO_SUBNAME[index]}
             </animated.div>
           ))}
         </div>

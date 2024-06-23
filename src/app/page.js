@@ -26,7 +26,6 @@ export default function Home() {
           into reality with boundless creativity and expertise. Enjoy peace of
           mind knowing you're getting fair pricing and exceptional service.
         </p>
-        <Footer />
       </main>
     </>
   );
