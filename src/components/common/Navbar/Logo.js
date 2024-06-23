@@ -9,7 +9,7 @@ const Logo = () => {
   const [logo, setLogo] = useState(LOGO_NAME);
   const [open, setOpen] = useState(false);
   const [timeout, setTimeout] = useState(null);
-  const ref = useRef();
+  const ignoreRef = useRef();
 
   const backgroundSpring = useSpring({
     width: open
@@ -23,12 +23,12 @@ const Logo = () => {
   });
 
   const [trails, api] = useTrail(LOGO_SUBNAME.length, () => ({
-    config: { mass: 5, tension: 300 },
+    config: { mass: 5 },
     opacity: 0,
   }));
 
   const startAnimation = (e) => {
-    if (e.target == ref.current && timeout) return;
+    if (e.target == ignoreRef.current && timeout) return;
     setTimeout(() => {
       setTimeout(true);
     }, 1000);
@@ -45,7 +45,7 @@ const Logo = () => {
   };
 
   const stopAnimation = (e) => {
-    if (e.target == ref.current) return;
+    if (e.target == ignoreRef.current) return;
 
     setLogo(LOGO_NAME);
     api.start({
@@ -71,7 +71,7 @@ const Logo = () => {
           {logo} <p className="animate-blink text-background">_</p>
         </animated.div>
 
-        <div class="flex" ref={ref}>
+        <div class="flex" ref={ignoreRef}>
           {trails.map((spring, index) => (
             <animated.div style={spring} className="min-w-[1ch] pr-[1ch]">
               {LOGO_SUBNAME[index]}
