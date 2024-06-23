@@ -15,9 +15,7 @@ const Loading = () => {
 
     setAnimationStart(true);
     swapEyebrownPos();
-    // Add the no-scroll class to the body element
 
-    // Cleanup by removing the no-scroll class when the component unmounts
     return () => {
       document.body.classList.remove("no-scroll");
     };

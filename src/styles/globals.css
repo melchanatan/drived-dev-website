@@ -78,7 +78,7 @@ body {
 
 /* utils */
 .highlight {
-  @apply p-2 rounded-lg bg-background-darken/60 backdrop-blur-sm flex items-center justify-center;
+  @apply px-2 rounded-lg bg-background-darken/60 backdrop-blur-sm flex items-center justify-center;
 }
 
 /* hero */
