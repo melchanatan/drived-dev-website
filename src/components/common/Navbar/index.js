@@ -1,6 +1,5 @@
 import React from "react";
 import Logo from "./Logo";
-import Demo from "./Demo";
 const Navbar = () => {
   return (
     <nav className="z-50 absolute px-page top-5 flex justify-between items-center w-full text-primary text-lg font-tiny5">
