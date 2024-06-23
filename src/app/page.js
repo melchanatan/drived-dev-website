@@ -1,11 +1,11 @@
-import MyCanvas from "@/components/Folder3d";
+import FolderCanvas from "@/components/common/FolderCanvas";
 import Footer from "@/components/common/Footer";
 import Loading from "@/components/common/Loading";
 export default function Home() {
   return (
     <>
       <main className="w-full h-screen bg-background">
-        <MyCanvas />
+        <FolderCanvas />
         <div className="flex items-center justify-center ">
           <div className="absolute left-page bottom-page flex flex-col gap-2 [&>*]:flex [&>*]:gap-3 [&>*]:items-center z-20">
             <span>

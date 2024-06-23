@@ -1,19 +1,19 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useGLTF, OrbitControls, Html } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useGLTF, Html } from "@react-three/drei";
 import useMousePosition from "@/hooks/useMousePosition";
 import { easing } from "maath";
 import { a } from "@react-spring/three";
 import { useSpring } from "@react-spring/core";
 
-function Box(props) {
-  const FOLDER_COLOR = "#FDD347";
+const FOLDER_COLOR = "#FDD347";
+const PAPER_COLOR = "#F9EEEB";
+
+function Folder3D(props) {
   const meshRef = useRef();
-  const { viewport } = useThree();
   const { nodes } = useGLTF("/models/folder/model.gltf");
-  const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(0);
+  const [isActive, setIsActive] = useState(0);
   const defaultRotation = [0.1, Math.PI / 2, 0];
   const textRef = useRef();
 
@@ -37,12 +37,12 @@ function Box(props) {
     );
   });
 
-  const { spring } = useSpring({
-    spring: active,
+  const { popSpring } = useSpring({
+    popSpring: isActive,
     config: { mass: 1.3, tension: 400, friction: 18 },
   });
 
-  const position = spring.to([0, 1], [1, 10]);
+  const middlePositionY = popSpring.to([0, 1], [1, 10]);
 
   return (
     <group
@@ -50,8 +50,8 @@ function Box(props) {
       rotation={defaultRotation}
       ref={meshRef}
       scale={0.13}
-      onPointerOver={() => setActive(1)}
-      onPointerOut={() => setActive(0)}
+      onPointerOver={() => setIsActive(1)}
+      onPointerOut={() => setIsActive(0)}
     >
       <mesh
         geometry={nodes.front.geometry}
@@ -65,7 +65,7 @@ function Box(props) {
       <a.group
         geometry={nodes.middle.geometry}
         position-x={0.4}
-        position-y={position}
+        position-y={middlePositionY}
       >
         {/* -4, 8, -17 */}
         <Html position={[-1.5, 8, -13]} occlude={[meshRef]} ref={textRef}>
@@ -75,7 +75,7 @@ function Box(props) {
           </div>
         </Html>
         <mesh
-          color={"#F9EEEB"}
+          color={PAPER_COLOR}
           geometry={nodes.middle.geometry}
           castShadow
           receiveShadow
@@ -96,25 +96,4 @@ function Box(props) {
   );
 }
 
-const MyCanvas = () => {
-  const spotLightPosition = [1.02, 1.32, 1.49];
-  const spotLightRotation = [0, 0, 0];
-
-  return (
-    <Canvas shadows className="z-10">
-      <ambientLight intensity={Math.PI / 2} color="#C7E1FE" />
-      {/* <OrbitControls /> */}
-      <directionalLight
-        castShadow
-        position={spotLightPosition}
-        rotation={spotLightRotation}
-        decay={Math.PI / 4}
-        color="#FFCE95"
-        intensity={Math.PI}
-      />
-      <Box />
-    </Canvas>
-  );
-};
-
-export default MyCanvas;
+export default Folder3D;
