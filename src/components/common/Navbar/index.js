@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { useSpring, animated } from "react-spring";
+import AnimatedLink from "../AnimatedLink";
 
 const Navbar = () => {
   const [startAnimation, setStartAnimation] = useState(false);
@@ -25,8 +26,8 @@ const Navbar = () => {
     >
       <Logo className="absolute left-page" />
       <div className="absolute left-1/2 -translate-x-1/2 flex gap-[6vw]">
-        <a href="">team</a>
-        <a href="">playground</a>
+        <AnimatedLink href="">team</AnimatedLink>
+        <AnimatedLink href="">playground</AnimatedLink>
       </div>
       <button>EN/TH</button>
     </animated.nav>

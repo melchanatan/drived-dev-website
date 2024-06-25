@@ -29,6 +29,7 @@ const Logo = () => {
 
   const startAnimation = (e) => {
     if (e.target == ignoreRef.current && timeout) return;
+
     setTimeout(() => {
       setTimeout(true);
     }, 1000);
