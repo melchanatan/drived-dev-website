@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { ANIMATION_DURATION, LOADING_OFFSET } from "@/libs/styleConst";
+import { ANIMATION_DURATION } from "@/libs/styleConst";
 
-const useStartAnimation = () => {
+const useStartAnimation = (offset = 300) => {
   const [startAnimation, setStartAnimation] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       setStartAnimation(true);
-    }, ANIMATION_DURATION + LOADING_OFFSET);
+    }, ANIMATION_DURATION + offset);
   }, []);
 
   return startAnimation;

@@ -2,13 +2,12 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import Logo from "./Logo";
-import { useSpring, animated } from "react-spring";
 import AnimatedLink from "../AnimatedLink";
-import { useStyleContext } from "@/libs/styleContext";
 import useStartAnimation from "@/hooks/useStartAnimation";
+import { useSpring, animated } from "react-spring";
 
 const Navbar = () => {
-  const startAnimation = useStartAnimation();
+  const startAnimation = useStartAnimation(300);
 
   const spring = useSpring({
     y: startAnimation ? 0 : -100,
