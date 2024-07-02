@@ -2,11 +2,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import Mouth from "./Mouth";
 import FoodTrail from "./FoodTrail";
-import { StyleContext } from "@/libs/styleContext";
+import { useStyleContext } from "@/libs/styleContext";
 
 const Loader = () => {
   const [loading, setLoading] = useState(true);
-  const { animationDuration } = useContext(StyleContext);
+  const { animationDuration } = useStyleContext();
 
   useEffect(() => {
     setTimeout(() => {

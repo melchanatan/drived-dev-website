@@ -18,4 +18,12 @@ const StyleProvider = ({ children }) => {
   );
 };
 
-export { StyleProvider, StyleContext };
+const useStyleContext = () => {
+  const context = useContext(StyleContext);
+  if (!context) {
+    throw new Error("useStyleContext must be used within a StyleProvider");
+  }
+  return context;
+};
+
+export { StyleProvider, useStyleContext };
