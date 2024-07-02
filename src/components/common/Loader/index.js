@@ -1,20 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Mouth from "./Mouth";
 import FoodTrail from "./FoodTrail";
+import { StyleContext } from "@/libs/styleContext";
 
 const Loader = () => {
   const [loading, setLoading] = useState(true);
+  const { animationDuration } = useContext(StyleContext);
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 4800);
+    }, animationDuration);
   });
+
   if (loading) return <LoadingFace />;
 };
-
-export default Loader;
 
 const LoadingFace = () => {
   const foodPool = ["📁", "📃", "📖"];
@@ -27,8 +28,6 @@ const LoadingFace = () => {
 
   useEffect(() => {
     startAnimationManager();
-
-    // prevent window scroll
     document.body.classList.add("no-scroll");
 
     return () => {
@@ -59,3 +58,5 @@ const LoadingFace = () => {
     </section>
   );
 };
+
+export default Loader;

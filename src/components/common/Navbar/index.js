@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Logo from "./Logo";
 import { useSpring, animated } from "react-spring";
 import AnimatedLink from "../AnimatedLink";
+import { StyleContext } from "@/libs/styleContext";
 
 const Navbar = () => {
   const [startAnimation, setStartAnimation] = useState(false);
+  const { animationDuration } = useContext(StyleContext);
 
   const spring = useSpring({
     y: startAnimation ? 0 : -100,
@@ -16,7 +18,7 @@ const Navbar = () => {
   useEffect(() => {
     setTimeout(() => {
       setStartAnimation(true);
-    }, 4800);
+    }, animationDuration);
   }, []);
 
   return (
