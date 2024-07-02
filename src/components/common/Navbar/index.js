@@ -5,21 +5,15 @@ import Logo from "./Logo";
 import { useSpring, animated } from "react-spring";
 import AnimatedLink from "../AnimatedLink";
 import { useStyleContext } from "@/libs/styleContext";
+import useStartAnimation from "@/hooks/useStartAnimation";
 
 const Navbar = () => {
-  const [startAnimation, setStartAnimation] = useState(false);
-  const { animationDuration } = useStyleContext();
+  const startAnimation = useStartAnimation();
 
   const spring = useSpring({
     y: startAnimation ? 0 : -100,
     from: { y: -100 },
   });
-
-  useEffect(() => {
-    setTimeout(() => {
-      setStartAnimation(true);
-    }, animationDuration);
-  }, []);
 
   return (
     <animated.nav

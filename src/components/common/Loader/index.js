@@ -2,16 +2,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import Mouth from "./Mouth";
 import FoodTrail from "./FoodTrail";
-import { useStyleContext } from "@/libs/styleContext";
+import { ANIMATION_DURATION } from "@/libs/styleConst";
 
 const Loader = () => {
   const [loading, setLoading] = useState(true);
-  const { animationDuration } = useStyleContext();
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, animationDuration);
+    }, ANIMATION_DURATION);
   });
 
   if (loading) return <LoadingFace />;
