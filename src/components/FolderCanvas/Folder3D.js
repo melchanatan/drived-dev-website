@@ -6,6 +6,8 @@ import useMousePosition from "@/hooks/useMousePosition";
 import { easing } from "maath";
 import { a } from "@react-spring/three";
 import { useSpring } from "@react-spring/core";
+import useStartAnimation from "@/hooks/useStartAnimation";
+import { BASE_LOADING_OFFSET } from "@/libs/styleConst";
 
 const FOLDER_COLOR = "#FDD347";
 const PAPER_COLOR = "#F9EEEB";
@@ -15,7 +17,12 @@ function Folder3D(props) {
   const { nodes } = useGLTF("/models/folder/model.gltf");
   const [isActive, setIsActive] = useState(0);
   const defaultRotation = [0.1, Math.PI / 2, 0];
-  const textRef = useRef();
+  const startAnimation = useStartAnimation(BASE_LOADING_OFFSET);
+
+  const startSpring = useSpring({
+    scale: startAnimation ? 0.11 : 0.02,
+    config: { mass: 0.05, tension: 20, friction: 1 },
+  });
 
   const [windowWidth, windowHeight] = [
     document.documentElement.clientWidth,
@@ -45,11 +52,11 @@ function Folder3D(props) {
   const middlePositionY = popSpring.to([0, 1], [1, 10]);
 
   return (
-    <group
+    <a.group
       {...props}
       rotation={defaultRotation}
       ref={meshRef}
-      scale={0.11}
+      scale={startSpring.scale}
       onPointerOver={() => setIsActive(1)}
       onPointerOut={() => setIsActive(0)}
     >
@@ -79,7 +86,7 @@ function Folder3D(props) {
       >
         <meshStandardMaterial color={FOLDER_COLOR} roughness={0.5} />
       </mesh>
-    </group>
+    </a.group>
   );
 }
 

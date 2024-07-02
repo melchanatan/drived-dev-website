@@ -5,18 +5,23 @@ import Logo from "./Logo";
 import AnimatedLink from "../AnimatedLink";
 import useStartAnimation from "@/hooks/useStartAnimation";
 import { useSpring, animated } from "react-spring";
+import { BASE_LOADING_OFFSET } from "@/libs/styleConst";
 
 const Navbar = () => {
-  const startAnimation = useStartAnimation(300);
+  const startAnimation = useStartAnimation(BASE_LOADING_OFFSET + 700);
+  const opacityStart = useStartAnimation(BASE_LOADING_OFFSET + 600);
 
   const spring = useSpring({
-    y: startAnimation ? 0 : -100,
-    from: { y: -100 },
+    y: startAnimation ? 0 : -30,
+    from: { y: -30 },
   });
 
   return (
     <animated.nav
-      style={spring}
+      style={{
+        opacity: opacityStart ? 1 : 0,
+        ...spring,
+      }}
       className="z-50 absolute px-page top-5 flex justify-between items-center w-full text-primary text-lg font-tiny5"
     >
       <Logo className="absolute left-page" />

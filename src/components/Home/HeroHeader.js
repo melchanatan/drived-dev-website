@@ -2,18 +2,23 @@
 import React from "react";
 import useStartAnimation from "@/hooks/useStartAnimation";
 import { useSpring, animated } from "react-spring";
+import { BASE_LOADING_OFFSET } from "@/libs/styleConst";
 
 const HeroHeader = () => {
-  const startAnimation = useStartAnimation(400);
+  const startAnimation = useStartAnimation(BASE_LOADING_OFFSET + 700);
+  const opacityStart = useStartAnimation(BASE_LOADING_OFFSET + 600);
 
   const spring = useSpring({
-    x: startAnimation ? 0 : -100,
-    from: { x: -100 },
+    y: startAnimation ? 0 : 100,
+    from: { y: 100 },
   });
 
   return (
     <animated.div
-      style={spring}
+      style={{
+        opacity: opacityStart ? 1 : 0,
+        ...spring,
+      }}
       className="absolute left-page bottom-page flex flex-col gap-2 [&>*]:flex [&>*]:gap-3 [&>*]:items-center z-20"
     >
       <span>
