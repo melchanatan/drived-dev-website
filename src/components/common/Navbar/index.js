@@ -8,8 +8,8 @@ import { useSpring, animated } from "react-spring";
 import { BASE_LOADING_OFFSET } from "@/libs/styleConst";
 
 const Navbar = () => {
-  const startAnimation = useStartAnimation(BASE_LOADING_OFFSET + 700);
-  const opacityStart = useStartAnimation(BASE_LOADING_OFFSET + 600);
+  const startAnimation = useStartAnimation(BASE_LOADING_OFFSET + 1000);
+  const opacityStart = useStartAnimation(BASE_LOADING_OFFSET + 1000);
 
   const spring = useSpring({
     y: startAnimation ? 0 : -30,

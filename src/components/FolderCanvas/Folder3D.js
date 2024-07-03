@@ -21,7 +21,7 @@ function Folder3D(props) {
 
   const startSpring = useSpring({
     scale: startAnimation ? 0.11 : 0.02,
-    config: { mass: 0.05, tension: 20, friction: 1 },
+    config: { mass: 0.1, tension: 20, friction: 1 },
   });
 
   const [windowWidth, windowHeight] = [
