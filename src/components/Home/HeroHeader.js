@@ -10,7 +10,7 @@ const HeroHeader = () => {
 
   const trailsComponents = [
     <>
-      <h1 className="hero-header__sub">Your</h1>,
+      <h1 className="hero-header__sub">Your</h1>
       <h1 className="hero-header highlight">path:// </h1>
     </>,
     <h1 className="hero-header highlight">to something</h1>,

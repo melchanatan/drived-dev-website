@@ -22,7 +22,7 @@ const Navbar = () => {
         opacity: opacityStart ? 1 : 0,
         ...spring,
       }}
-      className="z-50 absolute px-page top-5 flex justify-between items-center w-full text-primary text-lg font-tiny5"
+      className="z-50 absolute px-page top-5 flex justify-between items-center w-full text-primary text-md font-tiny5"
     >
       <Logo className="absolute left-page" />
       <div className="absolute left-1/2 -translate-x-1/2 flex gap-[6vw]">
