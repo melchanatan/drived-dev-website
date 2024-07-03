@@ -6,9 +6,8 @@ import HeroParagraph from "@/components/Home/HeroParagraph";
 export default function Home() {
   return (
     <>
-      <main className="w-full h-screen bg-background overflow-hidden">
+      <main className="w-full h-[calc(100vh-60px)] bg-background overflow-hidden relative">
         <FolderCanvas />
-
         <HeroHeader />
         <HeroParagraph />
       </main>

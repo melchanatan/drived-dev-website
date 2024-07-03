@@ -8,7 +8,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="bg-primary text-background px-4 py-8 font-raster flex justify-between">
+    <div className="bg-primary text-background px-4 h-[60px] font-raster flex justify-between items-center text-sm">
       <p className="">©2024 Drive D Dev All Rights Reserved</p>
       <ul className="flex gap-4">
         {socialLinks.map((link, index) => {
