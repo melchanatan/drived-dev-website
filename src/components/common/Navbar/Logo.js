@@ -74,7 +74,11 @@ const Logo = () => {
 
         <div class="flex" ref={ignoreRef}>
           {trails.map((spring, index) => (
-            <animated.div style={spring} className="min-w-[1ch] pr-[1ch]">
+            <animated.div
+              style={spring}
+              className="min-w-[1ch] pr-[1ch]"
+              key={index}
+            >
               {LOGO_SUBNAME[index]}
             </animated.div>
           ))}

@@ -16,7 +16,7 @@ const Footer = () => {
 
           return (
             <>
-              <li>
+              <li key={link.name}>
                 <a href={link.url} key={link.name}>
                   {link.name}
                 </a>

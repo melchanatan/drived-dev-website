@@ -10,13 +10,21 @@ const HeroHeader = () => {
 
   const trailsComponents = [
     <>
-      <h1 className="hero-header__sub">Your</h1>,
-      <h1 className="hero-header highlight">path:// </h1>
+      <h1 className="hero-header__sub" key="hero-header-1">
+        Your
+      </h1>
+      ,<h1 className="hero-header highlight">path:// </h1>
     </>,
-    <h1 className="hero-header highlight">to something</h1>,
+    <h1 className="hero-header highlight" key="hero-header-2">
+      to something
+    </h1>,
     <>
-      <h1 className="hero-header__sub">digitally</h1>
-      <h1 className="hero-header highlight">special</h1>
+      <h1 className="hero-header__sub" key="hero-header-3">
+        digitally
+      </h1>
+      <h1 className="hero-header highlight" key="hero-header-4">
+        special
+      </h1>
     </>,
   ];
 
@@ -34,7 +42,7 @@ const HeroHeader = () => {
       }}
     >
       {trails.map((trail, index) => (
-        <animated.div key={index} style={trail}>
+        <animated.div style={trail} key={"hero-header-" + index}>
           {trailsComponents[index]}
         </animated.div>
       ))}

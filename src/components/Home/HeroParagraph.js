@@ -23,7 +23,7 @@ const HeroParagraph = () => {
     >
       We strive to be your trusted technology partner. We turn your ideas into
       reality with boundless creativity and expertise. Enjoy peace of mind
-      knowing you're getting fair pricing and exceptional service.
+      knowing you&apos;re getting fair pricing and exceptional service.
     </animated.p>
   );
 };

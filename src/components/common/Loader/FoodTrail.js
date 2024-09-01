@@ -10,7 +10,11 @@ const FoodTrail = ({ start = false, foods = [] }) => {
       }}
     >
       {foods.map((r, index) => {
-        return <p className="text-4xl animate-big-bounce">{foods[index]}</p>;
+        return (
+          <p className="text-4xl animate-big-bounce" key={foods[index]}>
+            {foods[index]}
+          </p>
+        );
       })}
     </animated.div>
   );
